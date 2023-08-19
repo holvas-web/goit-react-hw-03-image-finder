@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 // import './App.css';
 import axios from 'axios';
 import { Searchbar } from './Searchbar/Searchbar';
-import { ImageGallery } from '../ImageGallery/ImageGallery';
-import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
-import { Button } from  '../Button/Button';
-import { Loader } from  '../Loader/Loader';
-import { Modal } from '../Modal/Modal';
+import { ImageGallery } from './ImageGallery/ImageGallery';
+import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
+import { Button } from  './Button/Button';
+import { Loader } from  './Loader/Loader';
+import { Modal } from './Modal/Modal';
 
 const API_KEY = '38934998-3e855f71d85cefaf04a1d7456';
 const BASE_URL = 'https://pixabay.com/api/';
@@ -68,7 +68,8 @@ export class App extends Component {
             <ImageGalleryItem
               key={image.id}
               webformatURL={image.webformatURL}
-              onClick={() => this.toggleModal(image.largeImageURL)}
+              largeImageURL={image.largeImageURL}
+              onClick={this.toggleModal}
             />
           ))}
         </ImageGallery>
