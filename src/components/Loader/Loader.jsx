@@ -1,9 +1,8 @@
-import React from 'react';
-import LoaderSpinner from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 
 export const CustomLoader = () => (
   <div className="loader">
-    <LoaderSpinner type="ThreeDots" color="#00BFFF" height={80} width={80} />
+    <ThreeDots color="#00BFFF" height={80} width={80} />
   </div>
 );
 
