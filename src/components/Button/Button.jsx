@@ -1,11 +1,28 @@
-import { Component } from "react";
+// Button.js
+import React from 'react';
 
-export class Button extends Component {
-    render() {
-      return (
-        <button className="load-more-button" onClick={this.props.onClick}>
-          Load more
-        </button>
-      );
-    }
-  }
+export const Button = ({ onClick, children }) => (
+  <button type="button" className="Button" onClick={onClick}>
+    {children}
+  </button>
+);
+
+
+
+// import React from "react"; 
+
+// export const Button = ({ onClick, children }) => (
+//   <button type="button" className="load-more-button" onClick={onClick}>
+//     {children}
+//   </button>
+// );
+
+// // export class Button extends Component {
+// //     render() {
+// //       return (
+// //         <button className="load-more-button" onClick={this.props.onClick}>
+// //           Load more
+// //         </button>
+// //       );
+// //     }
+// //   }
