@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { createPortal } from 'react-dom';
+// import { createPortal } from 'react-dom';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { CustomLoader } from './Loader/Loader';
-
+import { Modal } from './Modal/Modal';
 
 const API_KEY = '38934998-3e855f71d85cefaf04a1d7456';
 const BASE_URL = 'https://pixabay.com/api/';
 const PER_PAGE = 12;
-
-const modalRoot = document.querySelector('#modal-root');
 
 export class App extends Component {
   state = {
@@ -79,15 +77,11 @@ export class App extends Component {
         <ImageGallery images={images} onImageClick={this.toggleModal} />
         {isLoading && <CustomLoader />}
         {images.length > 0 && !isLoading && <Button onClick={this.fetchImages}>Load More</Button>}
-        {showModal &&
-          createPortal(
-            <div className="Overlay" onClick={this.handleOverlayClick}>
-              <div className="Modal">
-                <img src={largeImageURL} alt="" />
-              </div>
-            </div>,
-            modalRoot
-          )}
+        {showModal && (
+          <Modal onClose={this.toggleModal} largeImageURL={largeImageURL}>
+            <img src={largeImageURL} alt="" />
+          </Modal>
+        )}
       </div>
     );
   }

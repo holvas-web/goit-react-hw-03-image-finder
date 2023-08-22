@@ -26,12 +26,24 @@ export class Modal extends Component {
 
   render() {
     return createPortal(
-      <div className="overlay" onClick={this.handleOverlayClick}>
-        <div className="modal">
-          <img src={this.props.largeImageURL} alt="" />
+      <div className="Overlay" onClick={this.handleOverlayClick}>
+        <div className="Modal">
+          {this.props.children}
         </div>
       </div>,
       modalRoot
     );
   }
 }
+
+
+// render() {
+//   return createPortal(
+//     <div className="overlay" onClick={this.handleOverlayClick}>
+//       <div className="modal">
+//         <img src={this.props.largeImageURL} alt="" />
+//       </div>
+//     </div>,
+//     modalRoot
+//   );
+// }
