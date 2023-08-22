@@ -1,21 +1,7 @@
-import { ThreeDots } from 'react-loader-spinner';
+import { Watch } from 'react-loader-spinner';
 
 export const CustomLoader = () => (
   <div className="loader">
-    <ThreeDots color="#00BFFF" height={80} width={80} />
+    <Watch color="#9c27b0" height={80} width={80} />
   </div>
 );
-
-
-
-// import React from 'react';
-
-// // export class Loader extends Component {
-// //     render() {
-// //       return (
-// //         <div className="loader-container">
-// //           <div className="loader"></div>
-// //         </div>
-// //       );
-// //     }
-// //   }

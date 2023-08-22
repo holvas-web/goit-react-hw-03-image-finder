@@ -48,13 +48,14 @@ export class App extends Component {
   handleSearchSubmit = query => {
     this.setState({ query, images: [], page: 1 });
   };
-
+  
   toggleModal = (largeImageURL = '') => {
-    this.setState(prevState => ({
-      showModal: !prevState.showModal,
-      largeImageURL,
-    }));
-  };
+    this.setState(
+      prevState => ({
+        showModal: !prevState.showModal,
+        largeImageURL,
+      }));
+    }
 
   handleKeyDown = event => {
     if (event.code === 'Escape') {
