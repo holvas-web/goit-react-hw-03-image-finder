@@ -1,7 +1,7 @@
-import { Watch } from 'react-loader-spinner';
+import { Blocks } from 'react-loader-spinner';
 
 export const CustomLoader = () => (
   <div className="loader">
-    <Watch color="#9c27b0" height={80} width={80} />
+    <Blocks color="#9c27b0" height={40} width={40} />
   </div>
 );
