@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import { createPortal } from 'react-dom';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
@@ -19,13 +18,22 @@ export class App extends Component {
     isLoading: false,
     showModal: false,
     largeImageURL: '',
+    prevQuery: '', // Додано для збереження попереднього пошукового запиту
+    prevPage: 1,  // Додано для збереження попередньої сторінки
   };
-
+  
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.query !== this.state.query) {
+    if (prevState.query !== this.state.query || prevState.page !== this.state.page) {
       this.fetchImages();
     }
   }
+
+
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.query !== this.state.query) {
+  //     this.fetchImages();
+  //   }
+  // }
 
   fetchImages = () => {
     const { query, page } = this.state;
@@ -39,13 +47,18 @@ export class App extends Component {
       .then(response => {
         this.setState(prevState => ({
           images: [...prevState.images, ...response.data.hits],
-          page: prevState.page + 1,
+          // page: prevState.page + 1,
         }));
       })
       .finally(() => this.setState({ isLoading: false }));
   };
 
   handleSearchSubmit = query => {
+    if (this.state.query === query) {
+      alert(`You are already viewing results for ${query}`);
+      return;
+    }
+
     this.setState({ query, images: [], page: 1 });
   };
   
@@ -69,6 +82,10 @@ export class App extends Component {
     }
   };
 
+  handleLoadMore = () => {
+    this.setState(prevState => ({ page: prevState.page + 1 }));
+  };
+
   render() {
     const { images, isLoading, showModal, largeImageURL } = this.state;
 
@@ -77,7 +94,12 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleSearchSubmit} />
         <ImageGallery images={images} onImageClick={this.toggleModal} />
         {isLoading && <CustomLoader />}
-        {images.length > 0 && !isLoading && <Button onClick={this.fetchImages}>Load More</Button>}
+        {images.length > 0 && !isLoading && 
+          <Button onClick={() => this.setState(prevState => ({ page: prevState.page + 1 }))}>
+            Load More
+          </Button>
+        }
+        {/* <Button onClick={this.fetchImages}>Load More</Button> */}
         {showModal && (
           <Modal onClose={this.toggleModal} largeImageURL={largeImageURL}>
             <img src={largeImageURL} alt="" />
